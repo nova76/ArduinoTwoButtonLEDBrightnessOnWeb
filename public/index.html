@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ArduinoController</title>
+  <link rel="stylesheet" type="text/css" href="https://rawgit.com/rzajac/angularjs-slider/master/dist/rzslider.css"/>
+</head>
+<body>
+  <h1>{{"Led controller"}}</h1>
+  <div ng-controller="ArduinoController">
+    <button ng-click="ledDown()">-</button>
+	<input type="input" value="" ng-model="led" ng-disabled = "true" />
+    <button ng-click="ledUp()">+</button>
+	<rzslider rz-slider-on-change='onSliderChange()' rz-slider-model="led" rz-slider-floor="0" rz-slider-ceil="255"></rzslider>
+  </div>
+
+<script src="lib/socket.io-client/socket.io.js"></script>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular-socket-io/socket.js"></script>
+<script src="https://rawgit.com/rzajac/angularjs-slider/master/rzslider.js"></script>
+<script type="text/javascript">
+    var app = angular.module('myApp', ['btford.socket-io', 'rzModule']).
+    factory('arduinoSocket', function (socketFactory) {
+        return socketFactory();
+    }).
+    controller('ArduinoController', function ($scope, arduinoSocket) {
+        $scope.led = 0;
+        $scope.ledUp = function () {
+        arduinoSocket.emit('led:up');
+    };
+    $scope.ledDown = function () {
+        arduinoSocket.emit('led:down');
+    };
+	$scope.onSliderChange = function(){
+	  arduinoSocket.emit('led:value.from.client', $scope.led);
+	}	
+    arduinoSocket.on('led:value', function (data) {
+        $scope.led = data;
+    });
+});
+ </script>
+</body>
+</html>

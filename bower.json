@@ -1,0 +1,19 @@
+{
+  "name": "ArduinoTwoButtonLEDBrightnessOnWeb",
+  "version": "0.1.0",
+  "authors": [
+    "fi76 <fi76account@gmail.com>"
+  ],
+  "description": "Arduino: two buttons led brightness on the web",
+  "main": "server.js",
+  "keywords": [
+    "Arduino"
+  ],
+  "license": "MIT",
+  "homepage": "devblog.embertelen.hu",
+  "dependencies": {
+    "angular": "angularjs#~1.4.5",
+    "angular-socket-io": "~0.7.0",
+    "socket.io-client": "~1.3.6"
+  }
+}
