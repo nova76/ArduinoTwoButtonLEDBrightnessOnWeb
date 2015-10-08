@@ -2,4 +2,4 @@
 
 Arduino with node.js
 
-This is an Arduino project , in which an LED 's brightness is set using two buttons and from the web with a slider (rzslider)
+This is an Arduino project in which an LED brightness can be controlled with two buttons , or by using a slider ( rzslider ) from your browser
