@@ -23,7 +23,7 @@ var led, brightness = 0;
 
 function ledDown(step){
 	step = typeof step !== 'undefined' && step!=null ? step : 1;
-	brightness = brightness-step
+	brightness = parseInt(brightness)-parseInt(step)
 	if (brightness<0) brightness = 0;
 	led.brightness(brightness);
 	io.sockets.emit('led:value', brightness);
@@ -31,7 +31,7 @@ function ledDown(step){
 }
 function ledUp(step){
 	step = typeof step !== 'undefined' && step!=null ? step : 1;
-	brightness = brightness+step
+	brightness = parseInt(brightness)+parseInt(step)
 	if (brightness>255) brightness = 255;
 	led.brightness(brightness);
 	io.sockets.emit('led:value', brightness);
